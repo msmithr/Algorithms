@@ -1,3 +1,5 @@
+/* simple Java program to test and time topological sorting algorithms on randomly generated acyclic graphs */
+/* Author: Michael Smith */
 
 public class Driver {
 	
