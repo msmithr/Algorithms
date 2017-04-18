@@ -1,3 +1,6 @@
+/* implementation of a simple graph data structure and topological sorting algorithms */
+/* Author: Michael Smith */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
