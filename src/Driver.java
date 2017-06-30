@@ -1,4 +1,3 @@
-// Problem 8
 // Program for constructing an AVL tree given a list of n distinct integers
 
 public class Driver {
