@@ -36,15 +36,32 @@ void enqueue(int elem) {
 
     queue.data[queue.back] = elem;
     queue.back = (queue.back + 1) % queue.cap;
+
+    queue.size++;
 }
 
 int dequeue() {
     queue.front = (queue.front + 1) % queue.cap;
+    queue.size--;
     return queue.data[(queue.front - 1) % queue.cap];
 }
 
 void queue_expand() {
-    // TODO
+    int *new_array = malloc(sizeof(int) * queue.size * 2);
+    int i = 0;
+    for (int j = 0; j < queue.size; j++) {
+        new_array[i] = queue.data[(j + queue.front) % queue.cap];
+        i++;
+    }
+
+    queue.front = 0;
+    queue.back = queue.size;
+
+    queue.cap *= 2;
+    free(queue.data);
+    queue.data = new_array;
+
+
     return;
 }
 
@@ -55,10 +72,14 @@ void print_queue() {
     }
     printf("\n");
     printf("Queue: ");
-    for (int i = queue.front; i != queue.back; i = (i + 1) % queue.cap) {
-        printf("%d ", queue.data[i]);
+    
+    for (int i = 0; i < queue.size; i++) {
+        printf("%d ", queue.data[(i + queue.front) % queue.cap]);
     }
+
     printf("\n");
+//    printf("Front: %d\n", queue.front);
+//    printf("Back: %d\n", queue.back);
 }
 
 int main(int argc, char *argv[]) {
@@ -75,9 +96,14 @@ int main(int argc, char *argv[]) {
     dequeue();
     dequeue();
     dequeue();
-
     enqueue(5);
     enqueue(3);
     enqueue(2);
+    enqueue(3);
+    enqueue(3);
+    enqueue(3);
+    dequeue();
+    dequeue();
+    dequeue();
     print_queue();
 }
